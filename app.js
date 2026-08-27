@@ -24,9 +24,7 @@ function clearAll(){try{localStorage.removeItem(KEY);}catch(e){}state={meta:{},i
 var printBtn=byId('print'), clearBtn=byId('export');
 printBtn.textContent='Сохранить PDF';
 clearBtn.textContent='Очистить всё';
-var printRequested=false;
-printBtn.addEventListener('click',function(){printRequested=true;window.print();});
-window.addEventListener('afterprint',function(){if(!printRequested)return;printRequested=false;setTimeout(function(){if(window.confirm('PDF сохранён? Очистить все поля и фотографии для нового осмотра?')){clearAll();}},100);});
+printBtn.addEventListener('click',function(){window.print();});
 clearBtn.addEventListener('click',function(){if(window.confirm('Очистить все ответы, комментарии и фотографии? Это действие нельзя отменить.')){clearAll();}});
 if(navigator.storage&&navigator.storage.persist){navigator.storage.persist().catch(function(){});}
 byId('status').textContent='Офлайн-режим готов. Ответы сохраняются на устройстве, фото — в IndexedDB.';
